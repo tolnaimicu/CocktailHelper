@@ -38,12 +38,30 @@ export const getRandomCocktail = async () => {
     }
   };
 
-export const fetchCocktailDetails = async (id: string) => {
-  try {
-    const response = await axios.get(`${API_URL}/cocktail/${id}`);
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching cocktail details:', error);
-    return null;
-  }
-};
+  export const getAlcoholicCocktail = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/alchoholic`);
+      console.log(response);
+      return response.data;
+      
+    } catch (error) {
+      console.error('Error fetching alchoholic cocktails:', error);
+      return [];
+    }
+  };
+
+
+  export const getNonAlcoholicCocktail = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/non-alchoholic`);
+      console.log(response);
+      return response.data;
+      
+    } catch (error) {
+      console.error('Error fetching non-alchoholic cocktails:', error);
+      return [];
+    }
+  };
+
+
+

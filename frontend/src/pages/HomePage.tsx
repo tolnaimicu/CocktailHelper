@@ -54,7 +54,7 @@ const HomePage: React.FC = () => {
           <Link to="/search-cocktail">
             <button>Search for Cocktail</button>
           </Link>
-          <Link to="/search-non-alcoholic">
+          <Link to="/search-alc-cocktail">
             <button>Search for Non-alcoholic</button>
           </Link>
         </div>
