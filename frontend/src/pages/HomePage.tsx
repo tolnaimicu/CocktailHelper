@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchCocktails, getRandomCocktail } from '../services/cocktailService';
+import CocktailCard from '../components/CocktailCard';
 
 const HomePage: React.FC = () => {
   const [randomCocktail, setRandomCocktail] = useState<any>(null);
@@ -43,7 +44,10 @@ const HomePage: React.FC = () => {
       />
       <button onClick={handleSearch}>Search Cocktail</button>
 
-      <h2>Random Cocktail: {randomCocktail.strDrink}</h2>
+      <h2>Random Cocktail:</h2>
+      <div className="cocktail-list">
+        <CocktailCard cocktail={randomCocktail} />
+      </div>
 
        {/* Render first 10 searched cocktails */}
        {searchedCocktail.length > 0 ? (
@@ -51,7 +55,8 @@ const HomePage: React.FC = () => {
           <h2>Searched Cocktails:</h2>
           <ul>
             {searchedCocktail.map((cocktail: any, index: number) => (
-              <li key={index}>{cocktail.strDrink}</li>
+              
+              <CocktailCard key={index} cocktail={cocktail} />
             ))}
           </ul>
         </div>
