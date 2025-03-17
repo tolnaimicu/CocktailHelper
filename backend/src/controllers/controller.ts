@@ -53,3 +53,32 @@ export const searchByIngredient = async (req: Request, res: Response): Promise<v
         res.status(500).json({ error: "Failed to search ingredient: ", details: err });
   }
 };
+
+
+export const searchByAlchoholic = async (req: Request, res: Response): Promise<void> => {
+ 
+  try {
+
+    const response = await axios.get(`${BASE_URL}/filter.php?a=Alcoholic`);
+    res.json(response.data.drinks || []);
+    
+  } catch (err) {
+
+        console.error("❌ API Request Error:", err);
+        res.status(500).json({ error: "Failed to search alcholoic cocktails: ", details: err });
+  }
+};
+
+export const searchByNonAlchoholic = async (req: Request, res: Response): Promise<void> => {
+ 
+  try {
+
+    const response = await axios.get(`${BASE_URL}/filter.php?a=Non_Alcoholic`);
+    res.json(response.data.drinks || []);
+    
+  } catch (err) {
+
+        console.error("❌ API Request Error:", err);
+        res.status(500).json({ error: "Failed to search non-alcholoic cocktails: ", details: err });
+  }
+};
