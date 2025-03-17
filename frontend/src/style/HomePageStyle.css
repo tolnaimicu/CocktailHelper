@@ -1,0 +1,147 @@
+:root {
+    --gold: #ffd700;
+    --color1: #fefae0;
+    --color2: #e9edc9;
+    --color3: #ccd5ae;
+    --color4: #faedcd;
+    --color5: #6c584c;
+  }
+  
+  .home-container {
+    font-family: 'Arial', sans-serif;
+    color: var(--color5);
+    background-color: var(--color1);
+  }
+  
+  .hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+    background-color: var(--color2);
+  }
+  
+  .hero-content {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+  }
+  
+  .hero-text {
+    flex: 1;
+    padding-right: 20px;
+  }
+  
+  .hero-text h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: var(--gold);
+  }
+  
+  .hero-text p {
+    font-size: 1.2em;
+    line-height: 1.6;
+  }
+  
+  .hero-image {
+    flex: 1;
+  }
+  
+  .hero-image img {
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .random-cocktail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+    background-color: var(--color2);
+  }
+  
+  .random-cocktail-content {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+  }
+  
+  .random-cocktail-text {
+    flex: 1;
+    padding-left: 20px;
+  }
+  
+  .random-cocktail-text h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: var(--color5);
+  }
+  
+  .random-cocktail-text p {
+    font-size: 1.2em;
+    line-height: 1.6;
+  }
+  
+  .random-cocktail-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .random-cocktail-card button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: var(--color5);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .random-cocktail-card button:hover {
+    background-color: var(--color4);
+    color: var(--color5)
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    background-color: var(--color3);
+  }
+  
+  .options-title {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: var(--color5);
+  }
+  
+  .options-buttons {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .options-buttons button {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: var(--color5);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .options-buttons button:hover {
+    background-color: var(--color4);
+    color: var(--color5)
+  }
+  

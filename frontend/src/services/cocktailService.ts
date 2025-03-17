@@ -15,6 +15,17 @@ export const fetchCocktails = async (ingredient: string) => {
   }
 };
 
+export const fetchCocktailsByName = async (name: string) => {
+  try {
+    
+    const response = await axios.get(`${API_URL}/search?name=${name}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching cocktails:', error);
+    return [];
+  }
+};
+
 export const getRandomCocktail = async () => {
     try {
       const response = await axios.get(`${API_URL}/random`);

@@ -1,68 +1,80 @@
 import React, { useState, useEffect } from 'react';
-import { fetchCocktails, getRandomCocktail } from '../services/cocktailService';
+import { getRandomCocktail } from '../services/cocktailService';
 import CocktailCard from '../components/CocktailCard';
+import NavBar from '../components/NavBar';
+import '../style/HomePageStyle.css'; // Import the CSS file for HomePage styles
+import heroImage from '../assets/logo1.png'; // Adjust the path to your image file
+import Footer from '../components/Footer';
+import { Link } from 'react-router-dom';
 
 const HomePage: React.FC = () => {
   const [randomCocktail, setRandomCocktail] = useState<any>(null);
-  const [searchedCocktail, setSearchedCocktail] = useState<any[]>([]);
-  const [ingredient, setIngredient] = useState<string>(''); // Default ingredient
 
-  // Fetch random cocktail only once when the component mounts
-  useEffect(() => {
-    const getCocktails = async () => {
-      const result = await getRandomCocktail();
-      // Assuming the API returns an array, we want the first element
-      setRandomCocktail(result[0]);
-    };
-
-    getCocktails();
-  }, []);
-
-  // Function to trigger the cocktail search when the button is clicked
-  const handleSearch = async () => {
-    if (ingredient) {
-      const result = await fetchCocktails(ingredient);
-      const shuffled = result.sort(() => Math.random() - 0.5);
-    const randomTen = shuffled.slice(0, 10);
-    setSearchedCocktail(randomTen); 
-      console.log(result);
-    } else {
-      console.log("No ingredient entered");
-    }
+  const fetchRandomCocktail = async () => {
+    const result = await getRandomCocktail();
+    setRandomCocktail(result[0]);
   };
+
+  useEffect(() => {
+    fetchRandomCocktail();
+  }, []);
 
   if (!randomCocktail) return <p>Loading...</p>; // Loading state while fetching data
 
   return (
-    <div>
-      <h1>Cocktail Helper</h1>
-      <input
-        type="text"
-        value={ingredient}
-        onChange={(e) => setIngredient(e.target.value)} // Update ingredient on input change
-        placeholder="Enter an ingredient"
-      />
-      <button onClick={handleSearch}>Search Cocktail</button>
+    <div className="home-container">
+      <NavBar />
 
-      <h2>Random Cocktail:</h2>
-      <div className="cocktail-list">
-        <CocktailCard cocktail={randomCocktail} />
-      </div>
-
-       {/* Render first 10 searched cocktails */}
-       {searchedCocktail.length > 0 ? (
-        <div>
-          <h2>Searched Cocktails:</h2>
-          <ul>
-            {searchedCocktail.map((cocktail: any, index: number) => (
-              
-              <CocktailCard key={index} cocktail={cocktail} />
-            ))}
-          </ul>
+      {/* Introductory Section */}
+      <section className="hero">
+        <div className="hero-content">
+          <div className="hero-text">
+            
+            <p>
+              Welcome to CocktailHelper, your ultimate guide to discovering amazing cocktails! Whether you have a specific ingredient in mind or are looking for inspiration, we’re here to help you find the perfect drink.
+            </p>
+            <p>
+              Enter an ingredient, and we'll suggest a list of cocktails you can make, or let us surprise you with a random cocktail. Ready to start mixing?
+            </p>
+          </div>
+          <div className="hero-image">
+            <img src={heroImage} alt="Cocktails" />
+          </div>
         </div>
-      ) : (
-        <p>No searched cocktails found for {ingredient}</p>
-      )}
+      </section>
+
+      {/* Option Section */}
+      
+      <section className="options">
+      <h2 className="options-title">Get Started</h2>
+        <div className="options-buttons">
+          <Link to="/search">
+            <button>Search by Ingredient</button>
+          </Link>
+          <Link to="/search-cocktail">
+            <button>Search for Cocktail</button>
+          </Link>
+          <Link to="/search-non-alcoholic">
+            <button>Search for Non-alcoholic</button>
+          </Link>
+        </div>
+      </section>
+
+      {/* Random Cocktail Section */}
+      <section className="random-cocktail">
+        <div className="random-cocktail-content">
+          <div className="random-cocktail-card">
+            <CocktailCard cocktail={randomCocktail} />
+            <button onClick={fetchRandomCocktail}>Get A New One</button>
+          </div>
+          <div className="random-cocktail-text">
+            <h2>Your Random Cocktail:</h2>
+            <p>Discover a random cocktail and get inspired to try something new. Click the button below to generate a new random cocktail.</p>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
     </div>
   );
 };
