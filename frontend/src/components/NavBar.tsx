@@ -17,7 +17,7 @@ const NavBar: React.FC = () => {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-      <Link to="/">
+        <Link to="/">
           <img src={logo} alt="Cocktail Helper Logo" />
         </Link>
       </div>
