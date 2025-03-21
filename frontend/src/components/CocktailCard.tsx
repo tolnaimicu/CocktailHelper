@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/CocktailCardStyle.css';
 
@@ -8,9 +8,13 @@ interface CocktailCardProps {
 
 const CocktailCard: React.FC<CocktailCardProps> = ({ cocktail }) => {
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const handleClick = () => {
-    navigate(`/cocktail/${cocktail.idDrink}`);
+  const handleClick = (e : React.FormEvent) => {
+    e.preventDefault();
+    
+    navigate(`/specificCocktai?query=${cocktail.idDrink}`);
+    
   };
 
   return (

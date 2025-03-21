@@ -64,4 +64,17 @@ export const getRandomCocktail = async () => {
   };
 
 
+  export const fetchByID = async (id: string) => {
+    try {
+      
+      const response = await axios.get(`${API_URL}/searchByID?id=${id}`);
+      console.log(`${API_URL}/searchByID?id=${id}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching cocktail by id:', error);
+      return [];
+    }
+  };
+
+
 

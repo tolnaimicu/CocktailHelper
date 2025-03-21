@@ -82,3 +82,23 @@ export const searchByNonAlchoholic = async (req: Request, res: Response): Promis
         res.status(500).json({ error: "Failed to search non-alcholoic cocktails: ", details: err });
   }
 };
+
+
+export const searchById = async (req: Request, res: Response): Promise<void> => {
+  const { id } = req.query;
+  if (!id) {
+    res.status(400).json({ error: "No ID is entered" });
+    return;
+  }
+
+  try {
+
+    const response = await axios.get(`${BASE_URL}/lookup.php?i=${id}`);
+    res.json(response.data.drinks || []);
+
+  } catch (err) {
+
+        console.error("❌ API Request Error:", err);
+        res.status(500).json({ error: "Failed to search by specific ID: ", details: err });
+  }
+};

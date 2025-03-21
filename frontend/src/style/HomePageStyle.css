@@ -50,6 +50,7 @@
   
   .hero-image img {
     width: 100%;
+    max-width: 450px;
     border-radius: 8px;
   }
   
