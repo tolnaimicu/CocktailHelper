@@ -66,14 +66,53 @@ export const getRandomCocktail = async () => {
 
   export const fetchByID = async (id: string) => {
     try {
-      
       const response = await axios.get(`${API_URL}/searchByID?id=${id}`);
-      console.log(`${API_URL}/searchByID?id=${id}`);
-      return response.data;
+      console.log('API Response:', response.data); // Log the full API response
+  
+      const cocktail = response.data[0]; // Access the first cocktail in the array
+  
+      if (!cocktail) {
+        console.error('No cocktail found in the response.');
+        return null;
+      }
+  
+      // Extract ingredients and measurements
+      const ingredients = Array.from({ length: 15 }, (_, i) => {
+        const ingredient = cocktail[`strIngredient${i + 1}`];
+        const measure = cocktail[`strMeasure${i + 1}`];
+        if (ingredient) {
+          return {
+            name: ingredient,
+            measure: measure || '', // Use an empty string if no measure is provided
+            imageUrl: `https://www.thecocktaildb.com/images/ingredients/${ingredient}-Medium.png`,
+          };
+        }
+        return null;
+      }).filter(Boolean); // Remove null/undefined entries
+  
+      return {
+        ...cocktail,
+        ingredients, // Add processed ingredients with names, measures, and image URLs
+      };
     } catch (error) {
-      console.error('Error fetching cocktail by id:', error);
-      return [];
+      console.error('Error fetching cocktail by ID:', error);
+      return null;
     }
+  };
+
+
+  export const getIngredientImages = (ingredients: string[]) => {
+    console.log("in the ingredients section");
+    console.log("Print 3"+ingredients);
+    return ingredients.map((ingredient) => {
+      if (ingredient) {
+        return {
+          name: ingredient,
+          imageUrl: `https://www.thecocktaildb.com/images/ingredients/${ingredient}-Medium.png`,
+        };
+      }
+      return null;
+    }).filter(Boolean); // Remove null/undefined entries
   };
 
 

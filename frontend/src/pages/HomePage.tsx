@@ -25,23 +25,22 @@ const HomePage: React.FC = () => {
     <div className="home-container">
       <NavBar />
 
-      {/* Introductory Section */}
-      <section className="hero">
-        <div className="hero-content">
-          <div className="hero-text">
-            
-            <p>
-              Welcome to CocktailHelper, your ultimate guide to discovering amazing cocktails! Whether you have a specific ingredient in mind or are looking for inspiration, we’re here to help you find the perfect drink.
-            </p>
-            <p>
-              Enter an ingredient, and we'll suggest a list of cocktails you can make, or let us surprise you with a random cocktail. Ready to start mixing?
-            </p>
+
+      {/* Random Cocktail Section */}
+      <section className="random-cocktail">
+        <div className="random-cocktail-content">
+          <div className="random-cocktail-card">
+            <CocktailCard cocktail={randomCocktail} />
+            <button onClick={fetchRandomCocktail}>Get A New One</button>
           </div>
-          <div className="hero-image">
-            <img src={heroImage} alt="Cocktails" />
+          <div className="random-cocktail-text">
+            <h2>Your Random Cocktail:</h2>
+            <p>Discover a random cocktail and get inspired to try something new. Click the button below to generate a new random cocktail.</p>
           </div>
         </div>
       </section>
+
+    
 
       {/* Option Section */}
       
@@ -60,16 +59,20 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Random Cocktail Section */}
-      <section className="random-cocktail">
-        <div className="random-cocktail-content">
-          <div className="random-cocktail-card">
-            <CocktailCard cocktail={randomCocktail} />
-            <button onClick={fetchRandomCocktail}>Get A New One</button>
+      {/* Introductory Section */}
+      <section className="hero">
+        <div className="hero-content">
+          <div className="hero-text">
+            
+            <p>
+              Welcome to CocktailHelper, your ultimate guide to discovering amazing cocktails! Whether you have a specific ingredient in mind or are looking for inspiration, we’re here to help you find the perfect drink.
+            </p>
+            <p>
+              Enter an ingredient, and we'll suggest a list of cocktails you can make, or let us surprise you with a random cocktail. Ready to start mixing?
+            </p>
           </div>
-          <div className="random-cocktail-text">
-            <h2>Your Random Cocktail:</h2>
-            <p>Discover a random cocktail and get inspired to try something new. Click the button below to generate a new random cocktail.</p>
+          <div className="hero-image">
+            <img src={heroImage} alt="Cocktails" />
           </div>
         </div>
       </section>

@@ -3,7 +3,7 @@ import { fetchByID } from '../services/cocktailService';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import '../style/SpecificCocktailStyle.css'; // Import the CSS file for SpecificCocktail styles
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -11,6 +11,7 @@ const useQuery = () => {
 
 const SpecificCocktailPage: React.FC = () => {
   const query = useQuery();
+  const navigate = useNavigate();
   const searchQuery = query.get('query');
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [searchedCocktail, setSearchedCocktail] = useState<any | null>(null);
@@ -22,21 +23,23 @@ const SpecificCocktailPage: React.FC = () => {
   }, [searchQuery]);
 
   const handleSearch = async (query: string) => {
-    if (query) {
-      try {
-        const result = await fetchByID(query);
-        if (!result || result.length === 0) {
-          setErrorMessage('No cocktail found with this ID.');
-        } else {
-          setSearchedCocktail(result[0]); // Access the first element of the array
-        }
-      } catch (error) {
-        setErrorMessage('An error occurred while fetching the cocktail. Please try again.');
-        console.error(error);
+    try {
+      const result = await fetchByID(query);
+      if (!result) {
+        setErrorMessage('No cocktail found with this ID.');
+      } else {
+        setSearchedCocktail(result);
       }
-    } else {
-      setErrorMessage('Invalid query. Please try again.');
+    } catch (error) {
+      setErrorMessage('An error occurred while fetching the cocktail. Please try again.');
+      console.error(error);
     }
+  };
+
+
+  const handleIngredientClick = (ingredientName: string) => {
+    // Navigate to the ingredient details page
+    navigate(`/search/?query=${ingredientName}`);
   };
 
   return (
@@ -46,31 +49,50 @@ const SpecificCocktailPage: React.FC = () => {
         {searchedCocktail ? (
           <>
             <h1 className="cocktail-title">{searchedCocktail.strDrink}</h1>
+            <p className="cocktail-subtitle">{searchedCocktail.strAlcoholic} Drink</p>
             <div className="cocktail-details">
+              {/* Cocktail Image */}
               <div className="cocktail-image">
                 <img src={searchedCocktail.strDrinkThumb} alt={searchedCocktail.strDrink} />
+                {searchedCocktail.strImageSource && (
+                  <p className="image-source">
+                    Image Source: <a href={searchedCocktail.strImageSource}>Creative Commons</a>
+                  </p>
+                )}
               </div>
+
+              {/* Ingredients Section */}
               <div className="cocktail-ingredients">
                 <h2>Ingredients</h2>
                 <ul>
-                  {Array.from({ length: 15 }, (_, i) => i + 1).map((index) => {
-                    const ingredient = searchedCocktail[`strIngredient${index}`];
-                    const measure = searchedCocktail[`strMeasure${index}`];
-                    return (
-                      ingredient && (
-                        <li key={index}>
-                          {measure ? `${measure} ` : ''}{ingredient}
-                        </li>
-                      )
-                    );
-                  })}
+                  {searchedCocktail.ingredients.map((ingredient: any, index: number) => (
+                    <li
+                    key={index}
+                    className="ingredient-item"
+                    onClick={() => handleIngredientClick(ingredient.name)} // Pass the ingredient name to the handler
+                    style={{ cursor: 'pointer' }} // Add a pointer cursor to indicate it's clickable
+                  >
+                    <img
+                      src={ingredient.imageUrl}
+                      alt={ingredient.name}
+                      className="ingredient-image"
+                    />
+                    <span className="ingredient-text">
+                      {ingredient.measure} {ingredient.name}
+                    </span>
+                  </li>
+                  ))}
                 </ul>
               </div>
             </div>
+
+            {/* Instructions Section */}
             <div className="cocktail-instructions">
               <h2>Instructions</h2>
               <p>{searchedCocktail.strInstructions}</p>
             </div>
+
+            {/* Glass Section */}
             <div className="cocktail-glass">
               <h2>Glass</h2>
               <p>{searchedCocktail.strGlass}</p>

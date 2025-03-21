@@ -1,22 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { fetchCocktails } from '../services/cocktailService';
 import CocktailCard from '../components/CocktailCard';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import '../style/SearchPageStyle.css'; // Import the CSS file for SearchPage styles
+import { useLocation } from 'react-router-dom';
+
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+};
 
 const SearchPage: React.FC = () => {
+  const query = useQuery();
+  const searchQuery = query.get('query');
   const [searchedCocktail, setSearchedCocktail] = useState<any[]>([]);
   const [ingredient, setIngredient] = useState<string>('');
   const [searchClicked, setSearchClicked] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const handleSearch = async () => {
+  useEffect(() => {
+    if (searchQuery) {
+      setIngredient(searchQuery); // Set the ingredient to the search query
+      handleSearch(searchQuery); // Perform the search on page load
+    }
+  }, [searchQuery]);
+
+  const handleSearch = async (query: string) => {
     setSearchClicked(true);
     setErrorMessage(''); // Reset error message
-    if (ingredient) {
+    if (query) {
       try {
-        const result = await fetchCocktails(ingredient);
+        const result = await fetchCocktails(query);
         if (result.length === 0) {
           setErrorMessage('No cocktails found for the entered ingredient.');
         } else {
@@ -46,7 +60,7 @@ const SearchPage: React.FC = () => {
             onChange={(e) => setIngredient(e.target.value)}
             placeholder="Enter an ingredient"
           />
-          <button onClick={handleSearch}>Search Cocktail</button>
+          <button onClick={() => handleSearch(ingredient)}>Search Cocktail</button>
         </div>
 
         {/* Display error message if any */}
@@ -63,7 +77,7 @@ const SearchPage: React.FC = () => {
             </div>
           </div>
         ) : (
-          searchClicked && !errorMessage && <p></p>
+          searchClicked && !errorMessage && <p>No cocktails found.</p>
         )}
       </div>
       <Footer />

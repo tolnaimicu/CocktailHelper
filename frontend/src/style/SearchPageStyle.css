@@ -1,6 +1,6 @@
 :root {
     --gold: #ffd700;
-    --color1: #fefae0;
+    --color1: #f0ead2;
     --color2: #e9edc9;
     --color3: #ccd5ae;
     --color4: #faedcd;
@@ -13,7 +13,7 @@
     min-height: 100vh;
     font-family: 'Arial', sans-serif;
     color: var(--color5);
-    background-color: var(--color2);
+    background-color: var(--color1);
   }
   
   .content {

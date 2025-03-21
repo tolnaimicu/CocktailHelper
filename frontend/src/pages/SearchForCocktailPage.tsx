@@ -56,7 +56,7 @@ const SearchForCocktailPage: React.FC = () => {
       <NavBar />
       <div className="content">
         <h1>Search by Name</h1>
-        <p>Enter a name below and click "Search Cocktail" to find cocktail recipes.</p>
+        <p>Enter your prefered name below and click "Search Cocktail" to find the cocktail recipes.</p>
         <div className="search-bar">
           <input
             type="text"

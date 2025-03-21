@@ -1,93 +1,151 @@
 :root {
-    --gold: #ffd700;
-    --color1: #f0ead2;
-    --color2: #dde5b6;
-    --color3: #adc178;
-    --color4: #a98467;
-    --color5: #6c584c;
-  }
-  
-  .specific-cocktail-container {
-    font-family: 'Arial', sans-serif;
-    color: var(--color5);
-    background-color: var(--color1);
-    
-  }
-  
-  .content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .cocktail-title {
-    text-align: center;
-    font-size: 2.5em;
-    color: var(--color5);
-    margin-bottom: 20px;
-  }
-  
+  --gold: #ffd700;
+  --color1: #f0ead2;
+  --color2: #dde5b6;
+  --color3: #adc178;
+  --color4: #a98467;
+  --color5: #6c584c;
+}
+
+.specific-cocktail-container {
+  font-family: 'Arial', sans-serif;
+  color: var(--color1);
+  background-color: var(--color1);
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.cocktail-title {
+  text-align: center;
+  font-size: 2.5em;
+  color: var(--color5);
+  margin-bottom: 5px;
+}
+
+.cocktail-subtitle {
+  text-align: center;
+  font-size: 1 em;
+  color: var(--color4);
+  margin-bottom: 20px;
+  margin-top: 0px;
+}
+
+.cocktail-details {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping for responsive layout */
+  gap: 20px; /* Space between the image and ingredients */
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.cocktail-image {
+  flex: 1;
+  max-width: 400px;
+  text-align: center;
+}
+
+.cocktail-image img {
+  width: 90%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.image-source {
+  font-size: 0.9em;
+  color: var(--color4);
+  margin-top: 10px;
+}
+
+.cocktail-ingredients {
+  flex: 2;
+  min-width: 300px;
+}
+
+.cocktail-ingredients h2 {
+  font-size: 1.8em;
+  color: var(--color5);
+  margin-bottom: 10px;
+}
+
+.cocktail-ingredients ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap; /* Allow ingredients to wrap */
+  gap: 20px; /* Space between ingredient items */
+  justify-content: flex-start;
+}
+
+.ingredient-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100px;
+}
+
+.ingredient-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 5px;
+}
+
+.ingredient-text {
+  font-size: 1em;
+  color: var(--color4);
+}
+
+.cocktail-instructions {
+  margin-top: 20px;
+}
+
+.cocktail-instructions h2 {
+  font-size: 1.8em;
+  color: var(--color5);
+  margin-bottom: 10px;
+}
+
+.cocktail-instructions p {
+  font-size: 1.2em;
+  line-height: 1.6;
+  color: var(--color4);
+}
+
+.cocktail-glass {
+  margin-top: 20px;
+}
+
+.cocktail-glass h2 {
+  font-size: 1.8em;
+  color: var(--color5);
+  margin-bottom: 10px;
+}
+
+.cocktail-glass p {
+  font-size: 1.2em;
+  color: var(--color4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .cocktail-details {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column; /* Stack the image and ingredients vertically */
+    align-items: center; /* Center align for smaller screens */
   }
-  
-  .cocktail-image img {
-    width: 300px;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  /*
+  .cocktail-image {
+    max-width: 100%; /* Allow the image to take full width 
   }
-  
+  */
+
   .cocktail-ingredients {
-    flex: 1;
-    min-width: 300px;
+    width: 100%; /* Allow ingredients to take full width */
   }
-  
-  .cocktail-ingredients h2 {
-    font-size: 1.8em;
-    color: var(--color5);
-    margin-bottom: 10px;
-  }
-  
-  .cocktail-ingredients ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .cocktail-ingredients li {
-    font-size: 1.2em;
-    margin-bottom: 5px;
-  }
-  
-  .cocktail-instructions {
-    margin-top: 20px;
-  }
-  
-  .cocktail-instructions h2 {
-    font-size: 1.8em;
-    color: var(--color5);
-    margin-bottom: 10px;
-  }
-  
-  .cocktail-instructions p {
-    font-size: 1.2em;
-    line-height: 1.6;
-  }
-  
-  .cocktail-glass {
-    margin-top: 20px;
-  }
-  
-  .cocktail-glass h2 {
-    font-size: 1.8em;
-    color: var(--color5);
-    margin-bottom: 10px;
-  }
-  
-  .cocktail-glass p {
-    font-size: 1.2em;
-  }
+}
